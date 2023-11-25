@@ -1,4 +1,4 @@
-"""firstsaite URL Configuration
+"""blog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -18,6 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello_world/', include('hello_world.urls')),
-    path('good_bye/', include('good_bye.urls')),
+    path('news/', include('app_news.urls'))
 ]
