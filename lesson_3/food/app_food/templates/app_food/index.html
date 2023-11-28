@@ -1,0 +1,19 @@
+{% extends 'app_food/base.html' %}
+
+{% block products %}
+
+<div>
+  <ul>
+    {% for product in products %}
+    <li>
+      <h3>{{product.name}}</h3>
+      <p>{{product.description}}</p>
+      <button>{{product.price}} руб.</button>
+    </li>
+    {% empty %}
+    <h3>Продуктов пока нет</h3>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
