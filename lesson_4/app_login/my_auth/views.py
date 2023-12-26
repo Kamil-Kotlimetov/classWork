@@ -2,12 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
-from .forms import UserForm, ProfileForm
-from .models import Profile
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .forms import UserForm, ProfileForm, RecordForm, ImagesForm
+from .models import Profile, Record, ImagesRecord
 from django.contrib import messages
 
+
 def main_page(request, *args, **kwargs):
-    return render(request, 'my_auth/base.html')
+    records = Record.objects.all()[:3]
+    return render(request, 'my_auth/base.html', {'records': records})
 
 def login_view(request, *args, **kwargs):
     if request.method == 'GET':
@@ -52,3 +57,27 @@ def register_view(request, *args, **kwargs):
     user_form = UserForm()
     profile_form = ProfileForm()
     return render(request, 'my_auth/register.html', context={'user_form': user_form, 'profile_form': profile_form})
+
+
+class RecordFormView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        record_form = RecordForm
+        image_form = ImagesForm
+        return render(request, 'my_auth/record_form.html', context={'record_form': record_form, 'image_form': image_form})
+
+
+    def post(self, request):
+        record_form = RecordForm(request.POST)
+        image_form = ImagesForm(request.POST, request.FILES)
+        if record_form.is_valid() and image_form.is_valid():
+            new_record = record_form.save(commit=False)
+            new_record.user_id = request.user.id
+            new_record.save()
+            images = request.FILES.getlist('image')
+            for i_img in images:
+                instance = ImagesRecord(image=i_img, record=new_record)
+                instance.save()
+            return redirect('main')
+        return render(request, 'my_auth/record_form.html', context={'record_form': record_form, 'image_form': image_form, 'error': 'Something went wrong'})

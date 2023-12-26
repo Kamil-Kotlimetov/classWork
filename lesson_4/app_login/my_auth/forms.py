@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile, Record
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
 
@@ -17,3 +17,14 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('birthday', 'tel')
+
+
+class RecordForm(forms.ModelForm):
+
+    class Meta:
+        model = Record
+        exclude = ('user', )
+
+
+class ImagesForm(forms.Form):
+    image = forms.ImageField(widget=forms.FileInput(attrs={'multiple': 'multiple'}), required=False)
