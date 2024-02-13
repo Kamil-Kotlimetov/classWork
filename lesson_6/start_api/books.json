@@ -1,0 +1,32 @@
+[
+{
+    "model": "app_books_api.book",
+    "pk": 1,
+    "fields": {
+        "name": "Harry Potter",
+        "author": 1,
+        "publish_date": "1997-06-26",
+        "pagination_num": 500
+    }
+},
+{
+    "model": "app_books_api.book",
+    "pk": 2,
+    "fields": {
+        "name": "Percy Jackson",
+        "author": 2,
+        "publish_date": "2005-06-28",
+        "pagination_num": 400
+    }
+},
+{
+    "model": "app_books_api.book",
+    "pk": 3,
+    "fields": {
+        "name": "Curl book",
+        "author": 1,
+        "publish_date": "1995-02-01",
+        "pagination_num": 10
+    }
+}
+]
