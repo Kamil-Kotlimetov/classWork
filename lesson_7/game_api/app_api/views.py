@@ -1,3 +1,4 @@
+import time
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from .models import Game, GameUser
@@ -14,6 +15,7 @@ class GameListAPIView(APIView):
 
     def get(self, request):
         data = cache.get_or_set('games_list', Game.objects.all(), CACHE_TIME)
+        time.sleep(5)
         return JsonResponse(GameSerializer(data, many=True).data, safe=False)
 
     def post(self, request):
