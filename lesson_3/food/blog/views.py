@@ -6,7 +6,7 @@ from .forms import PostForm, CommentForm
 
 class NewsListView(ListView):
     model = News
-    template_name = 'blog/news_list.html'
+    template_name = 'comment_app/news_list.html'
     context_object_name = 'news'
     queryset = News.objects.filter(activity_flag='a')
 
@@ -16,13 +16,13 @@ class NewsDetailView(DetailView):
         news = get_object_or_404(News, pk=news_id)
         comment_form = CommentForm()
 
-        return render(request, 'blog/news_detail.html', context={'news': news, 'comment_form': comment_form})
+        return render(request, 'comment_app/news_detail.html', context={'news': news, 'comment_form': comment_form})
 
 class RegisterNews(View):
 
     def get(self, request):
         news_form = PostForm()
-        return render(request, 'blog/news_form.html', context={'news_form': news_form})
+        return render(request, 'comment_app/news_form.html', context={'news_form': news_form})
 
     def post(self, request):
         news_form = PostForm(request.POST)

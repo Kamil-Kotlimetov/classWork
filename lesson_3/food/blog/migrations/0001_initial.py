@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('published_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('activity_flag', models.CharField(choices=[('a', 'Active'), ('i', 'Inactive')], default='i', max_length=1)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.author', verbose_name='автор')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='comment_app.author', verbose_name='автор')),
             ],
             options={
                 'db_table': 'news',

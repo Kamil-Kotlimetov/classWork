@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0003_news_author'),
+        ('comment_app', '0003_news_author'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('username', models.CharField(max_length=20, verbose_name='логин')),
                 ('comment', models.TextField(verbose_name='комментарий')),
                 ('published_at', models.DateTimeField(auto_now_add=True, verbose_name='дата публикации')),
-                ('news', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.news', verbose_name='новость')),
+                ('news', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='comment_app.news', verbose_name='новость')),
             ],
             options={
                 'verbose_name': 'комментарий',
